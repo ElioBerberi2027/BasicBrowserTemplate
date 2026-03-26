@@ -25,12 +25,14 @@ class MainActivity : AppCompatActivity() {
         webView.webViewClient = object: WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
+                url?.run{
+                    urlEditText.setText(this)
+                }
             }
         }
         goButton.setOnClickListener {
             val userInput = urlEditText.text.toString()
             val formatedInput = formatUrl(userInput)
-            urlEditText.setText(formatedInput)
             webView.loadUrl(formatedInput)
         }
     }
