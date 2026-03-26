@@ -29,8 +29,27 @@ class MainActivity : AppCompatActivity() {
         }
         goButton.setOnClickListener {
             val userInput = urlEditText.text.toString()
-
-            webView.loadUrl(userInput)
+            val formatedInput = formatUrl(userInput)
+            urlEditText.setText(formatedInput)
+            webView.loadUrl(formatedInput)
         }
+    }
+
+    private fun formatUrl(url: String): String {
+
+        var fixedUrl = url.trim()
+
+        // add .com if user typed only a word
+        if (!fixedUrl.contains(".")) {
+            fixedUrl += ".com"
+        }
+
+        // add https if missing
+        if (!fixedUrl.startsWith("http://") &&
+            !fixedUrl.startsWith("https://")) {
+            fixedUrl = "https://$fixedUrl"
+        }
+
+        return fixedUrl
     }
 }
