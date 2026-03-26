@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
                 super.onPageFinished(view, url)
             }
         }
+        goButton.setOnClickListener {
+            val userInput = urlEditText.text.toString()
 
+            webView.loadUrl(userInput)
+        }
     }
 }
